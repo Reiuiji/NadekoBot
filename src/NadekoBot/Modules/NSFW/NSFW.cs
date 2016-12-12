@@ -232,6 +232,20 @@ namespace NadekoBot.Modules.NSFW
             }
         }
 
+        [NadekoCommand, Usage, Description, Aliases]
+        [RequireContext(ContextType.Guild)]
+        public async Task Derpibooru(IUserMessage umsg, [Remainder] string tag = null)
+        {
+            var channel = (ITextChannel)umsg.Channel;
+
+            tag = tag?.Trim() ?? "";
+            var link = await GetDerpibooruImageLink(tag).ConfigureAwait(false);
+            if (string.IsNullOrWhiteSpace(link))
+                await channel.SendErrorAsync("No results found.").ConfigureAwait(false);
+            else
+                await channel.SendMessageAsync(link).ConfigureAwait(false);
+        }
+
         public static async Task<string> GetKonachanImageLink(string tag)
         {
             var rng = new NadekoRandom();
@@ -324,6 +338,23 @@ namespace NadekoBot.Modules.NSFW
             {
                 Console.WriteLine("Error in e621 search: \n" + ex);
                 return "Error, do you have too many tags?";
+            }
+        }
+
+        public static async Task<string> GetDerpibooruImageLink(string tag)
+        {
+            using (var http = new HttpClient())
+            {
+                http.AddFakeHeaders();
+
+                var webpage = await http.GetStringAsync("https://derpibooru.org/search.json?q="+ tag.Replace(" ", "+")).ConfigureAwait(false);
+                var matches = Regex.Matches(webpage, "large\":\"(?<url>.*?)\"");
+                if (matches.Count == 0)
+                    return null;
+
+                var rng = new NadekoRandom();
+                var match = matches[rng.Next(0, matches.Count)];
+                return "https:" + matches[rng.Next(0, matches.Count)].Groups["url"].Value;
             }
         }
     }

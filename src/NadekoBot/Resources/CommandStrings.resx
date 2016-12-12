@@ -2745,4 +2745,13 @@
   <data name="type_usage" xml:space="preserve">
     <value>`{0}type @someone`</value>
   </data>
+  <data name="derpibooru_cmd" xml:space="preserve">
+    <value>derpibooru</value>
+  </data>
+  <data name="derpibooru_desc" xml:space="preserve">
+    <value>Shows a random image from derpibooru with a given tag. Tag is optional but preferred. (multiple tags are appended with +)</value>
+  </data>
+  <data name="derpibooru_usage" xml:space="preserve">
+    <value>`{0}derpibooru luna+fluttershy`</value>
+  </data>
 </root>

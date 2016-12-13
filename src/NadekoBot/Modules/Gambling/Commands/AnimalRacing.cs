@@ -156,7 +156,7 @@ namespace NadekoBot.Modules.Gambling
 
                             //draw the state
 
-                            var text = $@"\n|🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🔚|
+                            var text = $@"{String.Join("\n","|🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🔚|")}
 {String.Join("\n", participants.Select(p => $"{(int)(p.Total / 60f * 100),-2}%|{p.ToString()}"))}
 |🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🔚|";
                             if (msg == null || messagesSinceGameStarted >= 10) // also resend the message if channel was spammed

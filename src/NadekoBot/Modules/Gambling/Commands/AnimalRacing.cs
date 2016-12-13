@@ -90,8 +90,8 @@ namespace NadekoBot.Modules.Gambling
                     {
                         try
                         {
-                            try { await raceChannel.SendConfirmAsync($"🏁`Race is starting in 20 seconds or when the room is full. Type {NadekoBot.ModulePrefixes[typeof(Gambling).Name]}jr to join the race.`"); } catch (Exception ex) { _log.Warn(ex); }
-                            var t = await Task.WhenAny(Task.Delay(20000, token), fullgame);
+                            try { await raceChannel.SendConfirmAsync($"🏁`Race is starting in 30 seconds or when the room is full. Type {NadekoBot.ModulePrefixes[typeof(Gambling).Name]}jr to join the race.`"); } catch (Exception ex) { _log.Warn(ex); }
+                            var t = await Task.WhenAny(Task.Delay(30000, token), fullgame);
                             Started = true;
                             cancelSource.Cancel();
                             if (t == fullgame)

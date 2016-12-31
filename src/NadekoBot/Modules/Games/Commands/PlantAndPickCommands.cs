@@ -117,7 +117,7 @@ namespace NadekoBot.Modules.Games
 
                 await Task.WhenAll(msgs.Select(toDelete => toDelete.DeleteAsync())).ConfigureAwait(false);
 
-                await CurrencyHandler.AddCurrencyAsync((IGuildUser)imsg.Author, "Picked flower(s).", msgs.Count, false).ConfigureAwait(false);
+                await CurrencyHandler.AddCurrencyAsync((IGuildUser)imsg.Author, "Picked cotton(s).", msgs.Count, false).ConfigureAwait(false);
                 var msg = await channel.SendConfirmAsync($"**{imsg.Author}** picked {msgs.Count}{Gambling.Gambling.CurrencySign}!").ConfigureAwait(false);
                 var t = Task.Run(async () =>
                 {
